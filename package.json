@@ -16,8 +16,7 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "kolobok": "node src/kolobok.js",
-    "newYear": "node src/newYear.js"
+    "tale": "node src/tale.js"
   },
   "dependencies": {
     "acorn": "^8.19.0",
