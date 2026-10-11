@@ -1,11 +1,6 @@
-const
- helloPrefix =
-        "Hello, ";
+const helloPrefix = 'Hello, '
 
-function greet(name)
-{
-    return `${helloPrefix} ${name}!`
+function greet(name) {
+  return `${helloPrefix} ${name}!`
 }
-console.log(
-    greet('World')
-)
+console.log(greet('World'))
