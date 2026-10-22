@@ -1,3 +1,4 @@
+/* global describe test expect*/
 const axios = require("axios");
 //import axios from 'axios';
 

@@ -1,3 +1,5 @@
 reports
 build
 coverage
+specs
+eslint.config.mjs
