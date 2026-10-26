@@ -25,20 +25,16 @@ const uniqueUserName = {
 
 describe('Тесты для https://bookstore.demoqa.com', () => {
   test('Создание пользователя c ошибкой, логин уже используется', async () => {    
-    try{
-        await axios.post(`${BASE_URL}${CREATE_USER_URL}`, existingUser)
-    } catch (error){
-        expect(error.response?.status).toBe(406);
-        expect(error.response?.data.message).toBe("User exists!");
-    }  
+    const clientAxios = axios.create({ validateStatus: null })
+    const response = await clientAxios.post(`${BASE_URL}${CREATE_USER_URL}`, existingUser)
+    expect(response.status).toBe(406)
+    expect(response.data.message).toBe("User exists!")
   }, 10000);
-  test('Создание пользователя c ошибкой, пароль не подходит', async () => {    
-    try{
-        await axios.post(`${BASE_URL}${CREATE_USER_URL}`, wrongPassword)
-    } catch (error){
-        expect(error.response?.status).toBe(400);
-        expect(error.response?.data.message).toBe("Passwords must have at least one non alphanumeric character, one digit ('0'-'9'), one uppercase ('A'-'Z'), one lowercase ('a'-'z'), one special character and Password must be eight characters or longer.");
-    }   
+  test('Создание пользователя c ошибкой, пароль не подходит', async () => { 
+    const clientAxios = axios.create({ validateStatus: null })
+    const response = await clientAxios.post(`${BASE_URL}${CREATE_USER_URL}`, wrongPassword)
+    expect(response.status).toBe(400);
+    expect(response.data.message).toBe("Passwords must have at least one non alphanumeric character, one digit ('0'-'9'), one uppercase ('A'-'Z'), one lowercase ('a'-'z'), one special character and Password must be eight characters or longer."); 
   }, 10000);
 
   test('Создание пользователя успешно', async () => {    
