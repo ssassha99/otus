@@ -15,14 +15,14 @@ describe('Тесты для https://bookstore.demoqa.com', () => {
     expect(response.data.message).toBe('UserName and Password required.')
   }, 10000)
   test('Успешное удаление пользователя', async () => {    
-      const userID = (await userAPI.createUser(userData.uniqueUserNameForDeleting)).data.userID
-      const token = (await userAPI.generateToken(userData.uniqueUserNameForDeleting)).data.token
+      const userID = (await userAPI.createUser(userData.uniqueUserName)).data.userID
+      const token = (await userAPI.generateToken(userData.uniqueUserName)).data.token
       const response = await userAPI.deleteUser(userID, token)
       expect(response.status).toBe(204)
       expect(response.data).toBe('')
     }, 10000);
   test('Неуспешное удаление пользователя', async () => {    
-      const userID = (await userAPI.createUser(userData.uniqueUserNameForDeleting)).data.userID
+      const userID = (await userAPI.createUser(userData.uniqueUserName)).data.userID
       const response = await userAPI.deleteUser(userID) 
       expect(response.status).toBe(401)
       expect(response.data.message).toBe('User not authorized!')

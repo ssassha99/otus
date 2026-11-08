@@ -10,7 +10,7 @@ const badUser = {
     password: ''
 }
 
-const uniqueUserNameForDeleting = {
+const uniqueUserName = {
     userName: 'user_' + Date.now(),
     password: 'P@ssw0rd123' + Date.now(),
 }
@@ -25,4 +25,14 @@ const uniqueUserNameForGetingInformation_2 = {
     password: 'P@ssw0rd123' + Date.now(),
 }
 
-module.exports = { existingUser, badUser, uniqueUserNameForDeleting, uniqueUserNameForGetingInformation_1, uniqueUserNameForGetingInformation_2 }
+const wrongPassword = {
+    userName: 'user_' + Date.now(),
+    password: '111111'
+}
+
+const wrongPasswordForExistingUser = { 
+    userName: 'existingUser', 
+    password: 'Wrong_P@ssw0rd123' 
+}
+
+module.exports = { existingUser, badUser, uniqueUserName, uniqueUserNameForGetingInformation_1, uniqueUserNameForGetingInformation_2, wrongPassword, wrongPasswordForExistingUser }
