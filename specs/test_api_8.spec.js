@@ -1,6 +1,6 @@
 /* global describe test expect*/
 const userAPI = require('../framework/services/apiBooks.js')
-const userData = require('../framework/config/books.js')
+const userData = require('../framework/fixtures/users.js')
 
 describe('Тесты для https://bookstore.demoqa.com', () => {
   test('Успешная авторизация пользователя', async () => {    
