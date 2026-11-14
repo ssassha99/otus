@@ -39,6 +39,56 @@ class UserAPI {
             : {}
         return apiClient.get(`${URL.BASE_URL}${URL.ENDPOINTS.USER}/${userId}`, config)
     }
+    //Добавление книги пользователю
+    async addBook(userId, token, isbn) {
+        const config = token
+            ? {
+                  headers: { Authorization: `Bearer ${token}` }
+              }
+            : {}
+        return apiClient.post(
+            `${URL.BASE_URL}${URL.ENDPOINTS.BOOKS}`,
+            {
+                userId: userId,
+                collectionOfIsbns: [
+                    {
+                        isbn: isbn
+                    }
+                ]
+            },
+            config
+        )
+    }
+    //Получении информации о книги
+    async getBookInfo(isbn) {
+        return apiClient.get(`${URL.BASE_URL}${URL.ENDPOINTS.BOOK}?ISBN=${isbn}`)
+    }
+    //Удаление книги
+    async deleteBook(userId, token, isbn) {
+        return apiClient.delete(`${URL.BASE_URL}${URL.ENDPOINTS.BOOK}`, {
+            headers: token ? { Authorization: `Bearer ${token}` } : {},
+            data: {
+                isbn: isbn,
+                userId: userId
+            }
+        })
+    }
+    //Замена книги
+    async changeBook(userId, token, oldIsbn, newIsbn) {
+        const config = token
+            ? {
+                  headers: { Authorization: `Bearer ${token}` }
+              }
+            : {}
+        return apiClient.put(
+            `${URL.BASE_URL}${URL.ENDPOINTS.BOOKS}/${oldIsbn}`,
+            {
+                userId: userId,
+                isbn: newIsbn
+            },
+            config
+        )
+    }
 }
 
 module.exports = new UserAPI()
