@@ -1,6 +1,6 @@
 const userAPI = require('./apiBooks.js')
 
-class BookStoreController {
+class usersController {
     constructor(name, password) {
         this.name = name + '__' + Date.now()
         this.password = password || 'P@ssw0rd123'
@@ -24,7 +24,8 @@ class BookStoreController {
         return this
     }
     async addBooks(isbn) {
-        await userAPI.addBook(this.userId, this.token, isbn)
+        const response = await userAPI.addBook(this.userId, this.token, isbn)
+        return response.data
     }
     async getInfo() {
         const response = await userAPI.getUser(this.userId, this.token)
@@ -44,4 +45,4 @@ class BookStoreController {
     }
 }
 
-module.exports = BookStoreController
+module.exports = usersController
