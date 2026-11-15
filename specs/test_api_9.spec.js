@@ -1,5 +1,11 @@
 /* global describe test expect*/
 const user = require('../framework/services/usersController.js')
+const booksSchema = require('../framework/schema/bookSchema.js')
+const Ajv = require("ajv")
+
+const ajv = new Ajv();
+
+const booksValidate = ajv.compile(booksSchema.bookSchema)
 
 describe('Тесты для https://bookstore.demoqa.com', () => {
     test('Успешное создание книги', async () => {
@@ -8,6 +14,8 @@ describe('Тесты для https://bookstore.demoqa.com', () => {
         await newUser.getToken()
         await newUser.addBooks('9781593277574')
         const data = await newUser.getInfo()
+        const isValid = booksValidate(data.books)
+        expect(isValid).toBe(true)
         const book = data.books.find(el => el.isbn === '9781593277574')
         expect(book.isbn).toBe('9781593277574')
         expect(book.title).toBe('Understanding ECMAScript 6')
